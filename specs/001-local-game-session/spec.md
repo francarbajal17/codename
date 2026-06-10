@@ -16,6 +16,9 @@
 - Q: How long should a game remain active? → A: 24 hours from creation.
 - Q: Which word-list languages should the MVP support? → A: Separate English and Spanish lists,
   selected before game creation.
+- Q: How private must the leader QR link be? → A: Anyone may scan it; players are responsible for
+  following the in-room game rules.
+- Q: Does Spanish selection translate the interface? → A: No, only the board words for the MVP.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -158,8 +161,9 @@ private links remain paired only with their own boards and never display data fr
   preserving a stable word position for the lifetime of the game.
 - **FR-007**: The public game view MUST display a QR code that opens the private leader view for that
   exact game.
-- **FR-008**: The public game view MUST NOT reveal card ownership, neutral cards, the bomb, the
-  private access value, or any visual clue derived from the secret key.
+- **FR-008**: The public game view MUST NOT reveal card ownership, neutral cards, the bomb, or the
+  private access value as readable text or serialized application data. The visible QR code MAY
+  encode the private leader URL as its intended access mechanism.
 - **FR-009**: Each game's complete key MUST assign every board position to exactly one of red team,
   blue team, neutral, or bomb.
 - **FR-010**: Each game MUST contain exactly 9 cards for the starting team, 8 cards for the other
@@ -188,6 +192,8 @@ private links remain paired only with their own boards and never display data fr
   cue in addition to color.
 - **FR-022**: The experience MUST NOT present account, lobby, matchmaking, chat, score-history,
   payment, administration, or remote synchronization flows.
+- **FR-023**: Selecting Spanish MUST change only the board word list; interface controls, status
+  messages, and instructions MAY remain in English for the MVP.
 
 ### Information Classification *(mandatory when feature handles game data)*
 
@@ -195,11 +201,13 @@ private links remain paired only with their own boards and never display data fr
   words, starting team, public game availability, and the QR code image displayed on the shared game
   page. The QR destination is intended to be shared directly with leaders but MUST NOT be rendered
   as readable secret text on the main screen.
-- **Leader-only data**: The private access value and every card's red, blue, neutral, or bomb
-  assignment.
-- **Exposure prevention**: The shared board and any public game response MUST contain no ownership,
-  neutral, bomb, or private-access data. Invalid private links MUST return no board or key data. A
-  user following one game's public URL MUST never receive another game's public or leader-only data.
+- **Leader-only data**: Every card's red, blue, neutral, or bomb assignment.
+- **QR access data**: The private access value is intentionally encoded only in the visible QR code
+  and the resulting private leader URL. Anyone in the room may scan it; compliance with the game
+  roles is the players' responsibility.
+- **Exposure prevention**: The shared board and public application data MUST contain no ownership,
+  neutral, bomb, or readable private-access data. Invalid private links MUST return no board or key
+  data. A user following one game's public URL MUST never receive another game's data.
 
 ### Scope Exclusions *(mandatory)*
 
@@ -232,18 +240,17 @@ private links remain paired only with their own boards and never display data fr
 
 ### Measurable Outcomes
 
-- **SC-001**: At least 90% of first-time hosts can create a game and reach a complete playable board
-  within 30 seconds without instructions or assistance.
-- **SC-002**: At least 90% of team leaders can scan the QR code and identify the private key on a
-  phone within 20 seconds.
+- **SC-001**: In a timed acceptance test, a first-time host can create a game and reach a complete
+  playable board within 30 seconds without instructions or assistance.
+- **SC-002**: In a timed acceptance test, a team leader can scan the QR code and identify the private
+  key on a phone within 20 seconds.
 - **SC-003**: Every successfully created game displays exactly 25 distinct words in a 5x5 board.
 - **SC-004**: In all acceptance and release tests, the shared board reveals zero card assignments,
   bomb indicators, or readable private access values.
-- **SC-005**: In readability testing on a typical laptop or desktop display viewed from across a
-  small room, at least 90% of participants can correctly read all 25 words without approaching the
-  screen.
-- **SC-006**: In phone usability testing, at least 90% of participants can correctly identify the
-  category of any requested card without assistance.
+- **SC-005**: At viewport sizes from 1024x768 through 1920x1080, the shared board displays all 25
+  words without horizontal scrolling, overlap, or clipping.
+- **SC-006**: At phone portrait viewport widths from 320 through 430 pixels, the leader view displays
+  all card words and category cues without horizontal scrolling or clipped controls.
 - **SC-007**: Across at least 100 pairs of concurrently created games, every public board and leader
   key remains associated only with its own game, with zero cross-game information exposure.
 - **SC-008**: Every tested invalid, altered, unknown, or expired game link presents an understandable
@@ -258,6 +265,8 @@ private links remain paired only with their own boards and never display data fr
 - Team leaders have phones with internet access and QR-scanning capability.
 - The English and Spanish word lists are separate curated lists; words are not translated while a
   game is active.
+- Interface controls, instructions, and error messages remain in English for the MVP regardless of
+  the selected word-list language.
 - A standard 25-card key uses 9 cards for the starting team, 8 for the other team, 7 neutral cards,
   and 1 bomb; the starting team and position assignments are generated per game.
 - The QR code may be visible to everyone near the shared screen; privacy relies on players following

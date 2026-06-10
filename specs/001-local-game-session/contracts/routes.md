@@ -5,7 +5,8 @@
 - All dynamic game responses are non-cacheable unless a future review proves caching preserves
   expiry and secrecy guarantees.
 - Missing, expired, malformed, and unauthorized leader requests use a common unavailable-game UI.
-- Public responses never contain `leaderToken`, leader URL text, or card assignments.
+- Public application data never contains readable `leaderToken`, leader URL text, or card assignments.
+  The QR SVG payload is the intentional bearer-link exception.
 - Route parameters are treated as untrusted input.
 
 ## Home Page
@@ -163,9 +164,8 @@ metadata, comments, or attributes beyond encoded module path data.
 
 Automated tests MUST prove:
 
-- Public page HTML/RSC payload does not contain the known test token or assignment field names.
+- Public page HTML/RSC application payload does not contain the known test token or assignment fields.
 - Public page references only the token-free QR image path.
-- QR SVG decodes to the expected private leader URL in test coverage or an equivalent deterministic
-  QR-generation assertion.
+- QR SVG decodes with `@zxing/browser` to the expected private leader URL.
 - Invalid leader tokens expose no board data.
 - Two games cannot cross-load public or private projections.

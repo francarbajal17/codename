@@ -157,7 +157,8 @@ Examples of foundational tasks (adjust based on your project):
 - [ ] TXXX Code cleanup and refactoring
 - [ ] TXXX Performance optimization across all stories
 - [ ] TXXX [P] Additional unit tests (if requested) in tests/unit/
-- [ ] TXXX Verify public responses and client bundles contain no leader-only data
+- [ ] TXXX Verify public application data and client bundles contain no readable token or assignments,
+  while the QR payload resolves to the correct private leader URL
 - [ ] TXXX Validate shared-screen readability and mobile leader accessibility
 - [ ] TXXX Run quickstart.md validation
 

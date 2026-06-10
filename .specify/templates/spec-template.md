@@ -101,9 +101,10 @@
 ### Information Classification *(mandatory when feature handles game data)*
 
 - **Public data**: [Data that may be rendered on the shared screen or returned by public routes]
-- **Leader-only data**: [Secret data restricted to the token-protected leader view]
-- **Exposure prevention**: [Observable requirements proving leader-only data does not reach public
-  props, responses, routes, logs, or client bundles]
+- **Leader-only data**: [Secret assignments restricted to the token-protected leader view]
+- **QR access data**: [Whether the private URL/token is intentionally encoded only in the visible QR]
+- **Exposure prevention**: [Observable requirements proving readable tokens and assignments do not
+  reach public props, serialized application data, logs, or client bundles]
 
 ### Scope Exclusions *(mandatory)*
 

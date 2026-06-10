@@ -55,7 +55,7 @@ npx shadcn@latest add button select alert
 ## 3. Install Development Dependencies
 
 ```bash
-npm install -D vitest @vitest/coverage-v8 vite-tsconfig-paths \
+npm install -D vitest @vitest/coverage-v8 vite-tsconfig-paths @zxing/browser \
   @playwright/test prettier prettier-plugin-tailwindcss
 npx playwright install
 ```
@@ -119,11 +119,12 @@ Manual validation:
 
 1. Open `/`, select English, and create a game.
 2. Confirm the public page contains exactly 25 words in a 5x5 board and shows the starting team.
-3. Confirm no card assignment, bomb marker, token text, or leader URL appears in page source or
-   browser-loaded public data.
+3. Confirm no card assignment, bomb marker, readable token, or leader URL appears in page source or
+   browser-loaded public application data; the QR payload is the intended exception.
 4. Scan the QR code and confirm the phone opens the matching leader key.
 5. Confirm red, blue, neutral, and bomb cards use labels or symbols in addition to color.
 6. Repeat with Spanish and confirm all words come from the Spanish list.
+   Confirm the surrounding controls and messages remain in English.
 7. Create a second game and confirm URLs, boards, QR codes, and leader keys remain independent.
 8. Alter the leader token and confirm the unavailable state contains no board data.
 9. Open an unknown game ID and confirm the friendly unavailable state links back to `/`.

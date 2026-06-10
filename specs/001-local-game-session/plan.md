@@ -19,7 +19,7 @@ targeted persistence integration tests, and Playwright smoke coverage for the pr
 **Language/Version**: TypeScript 5.x in strict mode on Node.js 24 LTS
 
 **Primary Dependencies**: Next.js 16.2.x, React 19, Tailwind CSS 4.x, shadcn/ui CLI and selected
-components, `qrcode.react` 4.2.x, `@upstash/redis`
+components, `qrcode.react` 4.2.x, `@upstash/redis`; `@zxing/browser` for QR verification tests
 
 **Storage**: One Upstash Redis JSON-compatible game record per `gameId`, written with a fixed
 86,400-second TTL; no TTL refresh on reads
@@ -32,13 +32,13 @@ Next.js; shared laptop/desktop display plus phone portrait view
 
 **Project Type**: Single Next.js App Router web application initialized in the repository root
 
-**Performance Goals**: Host reaches a complete board within 30 seconds; leader reaches the key
-within 20 seconds; server-rendered public and leader pages target p95 under 1 second excluding cold
-starts and external network degradation
+**Performance Goals**: Timed acceptance journeys complete within 30 seconds for the host and 20
+seconds for the leader; layouts satisfy the laptop and phone viewport ranges defined in the spec
 
 **Constraints**: No authentication, accounts, WebSockets, realtime synchronization, permanent
-history, Supabase, monorepo, or custom backend host; public HTML/RSC payloads and client bundles must
-not contain the leader token or assignments; all games expire exactly 24 hours after creation
+history, Supabase, monorepo, or custom backend host; the token may exist only in the QR payload and
+private URL, while public HTML/RSC application data, readable text, logs, and client bundles must not
+contain readable tokens or assignments; all games expire exactly 24 hours after creation
 
 **Scale/Scope**: MVP public deployment for independent casual groups; 25 cards per game; English and
 Spanish built-in word lists; hundreds of simultaneous active games are sufficient for initial use
@@ -50,7 +50,7 @@ Spanish built-in word lists; hundreds of simultaneous active games are sufficien
 | Gate | Pre-Research | Post-Design Evidence |
 |------|--------------|----------------------|
 | MVP scope | Pass | One web app, one Redis record shape, no future multiplayer/account infrastructure |
-| Information separation | Pass | Public projection strips assignments/token; QR route returns SVG generated server-side; leader route validates token before projection |
+| Information separation | Pass | Public projection strips assignments/token; QR SVG is the explicit bearer-link exception; leader route validates token before projection |
 | Game isolation and lifetime | Pass | UUID `gameId`, Redis key scoped by ID, atomic write with 86,400-second TTL, no read extension |
 | Game logic boundary | Pass | `src/lib/game/` has pure functions with injected randomness and no framework/storage imports |
 | Frontend quality | Pass | Custom 5x5 board, responsive leader key, non-color labels, semantic controls, loading/error states |
@@ -95,8 +95,9 @@ stored records rather than passing partial state to views.
   redaction.
 - Integration tests use a narrow fake Redis command surface or mocked `@upstash/redis` client to
   verify key scoping, atomic TTL writes, no TTL refresh, expired/missing behavior, and token checks.
-- Playwright covers language selection, game creation, public-board secrecy, QR endpoint presence,
-  valid leader rendering, invalid token handling, mobile viewport layout, and two-game isolation.
+- Playwright covers language selection, game creation, public-board secrecy, ZXing verification of
+  the QR destination, valid leader rendering, invalid token handling, viewport ranges, and two-game
+  isolation.
 - A production build, lint, typecheck, unit tests, and selected browser tests are release gates.
 
 ## Project Setup Strategy

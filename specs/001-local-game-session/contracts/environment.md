@@ -13,11 +13,11 @@ Neither variable may use the `NEXT_PUBLIC_` prefix or be imported by Client Comp
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `APP_ORIGIN` | Request-derived origin | Canonical absolute origin used when producing the leader URL for QR generation; recommended in production |
+| `APP_ORIGIN` | `http://localhost:3000` in local development | Canonical absolute origin used when producing the leader URL; required in production |
 
-If `APP_ORIGIN` is set, it must be an absolute `https://` URL in production. Local development may
-use `http://localhost:3000`. Request-derived origins must use trusted platform headers and must not
-accept arbitrary client-supplied host values without validation.
+`APP_ORIGIN` MUST be an absolute `https://` URL in production. Local development may default to
+`http://localhost:3000`. QR generation MUST NOT derive the production origin from request host
+headers.
 
 ## Constants Kept in Code
 
@@ -34,7 +34,8 @@ behavior.
 ## Validation Behavior
 
 - Environment parsing happens only in server modules.
-- Missing or malformed required variables fail fast with variable names but never credential values.
+- Missing or malformed required variables, including production `APP_ORIGIN`, fail fast with variable
+  names but never credential values.
 - Production startup/build validation must catch absent Redis configuration before traffic is served.
 - Test configuration may inject a fake persistence client and must not require real production
   credentials for pure unit tests.

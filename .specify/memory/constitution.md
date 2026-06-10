@@ -1,18 +1,9 @@
 <!--
 Sync Impact Report
-- Version change: template (unratified) -> 1.0.0
-- Modified principles: none; initial constitution
-- Added principles:
-  - I. MVP Simplicity First
-  - II. Public and Secret Information Separation
-  - III. Independent and Temporary Games
-  - IV. Isolated and Testable Game Logic
-  - V. Clear, Accessible, Polished Frontend
-  - VI. Public Deployment Without Initial Authentication
-  - VII. Prepared for Future Evolution
-- Added sections:
-  - Technical Constraints
-  - Development Workflow and Quality Gates
+- Version change: 1.0.0 -> 1.0.1
+- Modified principles:
+  - II. Public and Secret Information Separation: clarified the intentional QR bearer-link exception
+- Added sections: none
 - Removed sections: none
 - Templates:
   - ✅ updated: .specify/templates/plan-template.md
@@ -41,10 +32,12 @@ and focused on the in-person shared-board experience.
 ### II. Public and Secret Information Separation
 The shared main screen MUST display only public game information. The secret leader key MUST be
 available only through a private leader view whose URL contains a sufficiently unpredictable access
-token. Secret state MUST NOT appear in public routes, public props, serialized public responses,
-logs intended for clients, or client bundles. Server endpoints and persistence access MUST return
-the minimum data required by each view. This separation is a product invariant: accidental exposure
-of the key invalidates the game.
+token. The shared screen MAY expose that private URL only as the payload of the visible QR code,
+because scanning the code is the intended casual in-room access mechanism. The token and card
+assignments MUST NOT otherwise appear as readable text, public component props, serialized public
+application data, logs, or client bundles. Server endpoints and persistence access MUST return the
+minimum data required by each view. This separation prevents accidental disclosure while preserving
+the same player-responsibility model as the physical game.
 
 ### III. Independent and Temporary Games
 Every game MUST have a unique `gameId`, and all reads and writes MUST be scoped to that identifier.
@@ -92,12 +85,13 @@ the obligation to deliver a small MVP now.
 - TypeScript strict mode MUST be enabled where supported; exceptions MUST be narrow and documented.
 - shadcn/ui MUST be used selectively for generic primitives, not as a substitute for product-specific
   board design.
-- QR codes MUST be generated with `qrcode.react` and MUST point to the private leader route without
-  rendering the secret key on the shared screen.
+- QR codes MUST be generated with `qrcode.react` and MAY encode the private leader URL as their
+  payload, but the token MUST NOT be rendered as readable text or exposed in public application data.
 - Temporary game persistence MUST use Upstash Redis with TTL. Supabase MUST NOT be introduced in the
   MVP unless a documented future architecture decision replaces Redis.
 - Critical game state MUST NOT exist only in server memory.
-- Secrets MUST NOT be exposed through public routes, public component props, or client bundles.
+- Card assignments and readable access tokens MUST NOT be exposed through public application data,
+  public component props, logs, or client bundles. The QR payload is the sole public-route exception.
 - WebSockets or other realtime infrastructure MUST NOT be added until observable product behavior
   requires it.
 - The deployment target MUST remain Vercel-compatible.
@@ -132,4 +126,4 @@ backward-incompatible way, MINOR for adding a principle or materially expanding 
 PATCH for clarifications without semantic change. Compliance MUST be reviewed whenever a feature is
 specified, planned, and approved for release.
 
-**Version**: 1.0.0 | **Ratified**: 2026-06-10 | **Last Amended**: 2026-06-10
+**Version**: 1.0.1 | **Ratified**: 2026-06-10 | **Last Amended**: 2026-06-10

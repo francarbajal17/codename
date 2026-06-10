@@ -66,12 +66,13 @@ with the constitution.
 
 **Decision**: Use `qrcode.react` 4.2.x `QRCodeSVG` inside a Node Route Handler that renders static SVG
 server-side. The public page embeds `/games/{gameId}/leader-qr`; that endpoint loads the token on the
-server and returns only SVG path data with `Cache-Control: private, no-store`.
+server and returns only SVG path data with `Cache-Control: private, no-store`. Use the widely adopted
+ZXing implementation through `@zxing/browser` to decode generated QR images in automated tests.
 
-**Rationale**: `qrcode.react` supports SVG and recommends it for flexibility. Passing the leader URL
-to a Client Component would serialize the token into public page data. Server-rendering the QR in a
-dedicated image response satisfies the selected library requirement while keeping the token out of
-public props, RSC payloads, and client bundles.
+**Rationale**: `qrcode.react` supports SVG and recommends it for flexibility. The visible QR is the
+intentional casual bearer link, equivalent to access to the leader card in the physical game.
+Server-rendering keeps the token out of readable public props, RSC application data, and client
+bundles. ZXing provides an established decoder for verifying the generated destination.
 
 **Alternatives considered**:
 

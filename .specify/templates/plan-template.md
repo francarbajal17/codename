@@ -42,8 +42,9 @@
 
 - **MVP scope**: The design implements only current observable requirements and identifies any new
   abstraction or infrastructure with the concrete problem it solves.
-- **Information separation**: Public and leader data flows are documented. Secret keys cannot reach
-  public routes, public props, client bundles, or shared-screen responses.
+- **Information separation**: Public and leader data flows are documented. The private URL may appear
+  only as the visible QR payload; readable tokens and assignments cannot reach public props,
+  serialized application data, logs, or client bundles.
 - **Game isolation and lifetime**: State is scoped by a unique `gameId`, stored outside server memory,
   and assigned an explicit Redis TTL with defined expired-game behavior.
 - **Game logic boundary**: Generation and validation rules remain pure TypeScript modules independent
