@@ -1,7 +1,6 @@
 # Quickstart: Local Game Session
 
-This guide starts from the current repository state: Spec Kit scaffolding exists, but no Next.js
-application or `package.json` exists yet.
+This guide starts from a clean checkout of the implemented repository.
 
 ## Prerequisites
 
@@ -10,54 +9,11 @@ application or `package.json` exists yet.
 - Git
 - Optional for deployment: a Vercel account and CLI
 
-## 1. Bootstrap Next.js Without Overwriting Spec Kit
-
-Generate a temporary current Next.js project:
+## 1. Install Dependencies
 
 ```bash
-npx create-next-app@latest /tmp/codename-next-bootstrap \
-  --typescript --eslint --tailwind --app --src-dir --import-alias '@/*' \
-  --use-npm --empty --disable-git --no-agents-md
-```
-
-Merge the generated application files into the repository root while preserving `.git/`, `.agents/`,
-`.specify/`, `specs/`, `AGENTS.md`, and existing project documentation. Set `package.json` name to
-`codename`. Do not initialize a second Git repository.
-
-Verify `tsconfig.json` includes:
-
-```json
-{
-  "compilerOptions": {
-    "strict": true
-  }
-}
-```
-
-## 2. Install Runtime Dependencies
-
-```bash
-npm install @upstash/redis qrcode.react
-```
-
-Initialize shadcn/ui against the existing Next.js project:
-
-```bash
-npx shadcn@latest init
-```
-
-Add only the generic components selected during implementation, for example:
-
-```bash
-npx shadcn@latest add button select alert
-```
-
-## 3. Install Development Dependencies
-
-```bash
-npm install -D vitest @vitest/coverage-v8 vite-tsconfig-paths @zxing/browser \
-  @playwright/test prettier prettier-plugin-tailwindcss
-npx playwright install
+npm ci
+npx playwright install chromium
 ```
 
 Expected package scripts:
@@ -76,7 +32,7 @@ npm run test:coverage  Run Vitest with coverage
 npm run test:e2e       Run Playwright tests
 ```
 
-## 4. Configure Environment
+## 2. Configure Environment
 
 Create `.env.local` from the contract in [environment.md](./contracts/environment.md):
 
@@ -88,21 +44,15 @@ APP_ORIGIN=http://localhost:3000
 
 Do not expose either Upstash value with a `NEXT_PUBLIC_` prefix.
 
-## 5. Validate the Empty Application Foundation
-
-Before feature code is added, these commands must pass:
+## 3. Run the Application
 
 ```bash
-npm run lint
-npm run typecheck
-npm test
-npm run build
 npm run dev
 ```
 
-Open `http://localhost:3000` and confirm the initial page loads.
+Open `http://localhost:3000`.
 
-## 6. Validate the Implemented Feature
+## 4. Validate the Implemented Feature
 
 Run static and automated checks:
 
@@ -133,7 +83,7 @@ Manual validation:
 See [routes.md](./contracts/routes.md) and [data-model.md](./data-model.md) for exact contracts and
 invariants.
 
-## 7. Vercel Deployment
+## 5. Vercel Deployment
 
 1. Import the repository as a Vercel project with the root directory unchanged.
 2. Select Node.js 24 and the standard Next.js build command.

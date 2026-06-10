@@ -1,0 +1,10 @@
+export const BOARD_SIZE = 25;
+export const STARTING_TEAM_CARD_COUNT = 9;
+export const OTHER_TEAM_CARD_COUNT = 8;
+export const NEUTRAL_CARD_COUNT = 7;
+export const BOMB_CARD_COUNT = 1;
+export const GAME_TTL_SECONDS = 86_400;
+export const GAME_TTL_MS = GAME_TTL_SECONDS * 1_000;
+export const GAME_SCHEMA_VERSION = 1;
+export const REDIS_GAME_KEY_PREFIX = "codename:game:";
+export const LEADER_TOKEN_BYTES = 32;

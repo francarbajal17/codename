@@ -19,7 +19,7 @@ targeted persistence integration tests, and Playwright smoke coverage for the pr
 **Language/Version**: TypeScript 5.x in strict mode on Node.js 24 LTS
 
 **Primary Dependencies**: Next.js 16.2.x, React 19, Tailwind CSS 4.x, shadcn/ui CLI and selected
-components, `qrcode.react` 4.2.x, `@upstash/redis`; `@zxing/browser` for QR verification tests
+components, server-side `qrcode` 1.5.x, `@upstash/redis`; `@zxing/browser` for QR verification tests
 
 **Storage**: One Upstash Redis JSON-compatible game record per `gameId`, written with a fixed
 86,400-second TTL; no TTL refresh on reads

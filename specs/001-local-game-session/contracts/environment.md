@@ -57,4 +57,4 @@ Provide `.env.example` with empty placeholders and no secrets.
 - Configure variables separately for Development, Preview, and Production.
 - Prefer separate Preview and Production Upstash databases.
 - The Vercel Marketplace integration may inject the two Upstash variables automatically.
-- Set `APP_ORIGIN` to the production public URL; preview deployments may derive their request origin.
+- Set `APP_ORIGIN` to the exact HTTPS origin for each Preview and Production deployment.

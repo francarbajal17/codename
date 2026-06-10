@@ -64,24 +64,30 @@ with the constitution.
 
 ## 4. QR Code Rendering Without Token Leakage
 
-**Decision**: Use `qrcode.react` 4.2.x `QRCodeSVG` inside a Node Route Handler that renders static SVG
-server-side. The public page embeds `/games/{gameId}/leader-qr`; that endpoint loads the token on the
-server and returns only SVG path data with `Cache-Control: private, no-store`. Use the widely adopted
-ZXing implementation through `@zxing/browser` to decode generated QR images in automated tests.
+**Decision**: Use the standard `qrcode` package inside a Node Route Handler to generate a standalone
+SVG. The public page embeds `/games/{gameId}/leader-qr`; that endpoint loads the token on the server
+and returns only SVG path data with `Cache-Control: private, no-store`. Use the widely adopted ZXing
+implementation through `@zxing/browser` to decode generated QR images in automated tests.
 
-**Rationale**: `qrcode.react` supports SVG and recommends it for flexibility. The visible QR is the
-intentional casual bearer link, equivalent to access to the leader card in the physical game.
-Server-rendering keeps the token out of readable public props, RSC application data, and client
-bundles. ZXing provides an established decoder for verifying the generated destination.
+**Rationale**: The visible QR is the intentional casual bearer link, equivalent to access to the
+leader card in the physical game. A byte-oriented server encoder keeps the token out of readable
+public props, RSC application data, and client bundles. During implementation, `qrcode.react` could
+not be rendered from a Next.js 16 Route Handler without unsupported React server-renderer imports or
+duplicate React hook dispatchers. `qrcode` provides the same SVG result at the correct server
+boundary. ZXing verifies the generated destination.
 
 **Alternatives considered**:
 
-- Client-render `QRCodeSVG`: rejected because its `value` prop would expose the token to public
-  client data.
+- Client-render `QRCodeSVG`: rejected because its `value` prop would expose the token to public client
+  data.
+- Server-render `qrcode.react`: rejected after implementation validation because Next.js 16 blocks
+  direct `react-dom/server` use in Route Handlers and alternate renderers produced hook mismatches.
 - Show the private URL as text: rejected by the specification.
-- Add a second QR generation library: rejected as unnecessary complexity.
 
-**Source**: https://github.com/zpao/qrcode.react
+**Sources**:
+
+- https://github.com/soldair/node-qrcode
+- https://github.com/zpao/qrcode.react
 
 ## 5. Upstash Redis and TTL
 

@@ -28,13 +28,13 @@ test and can be validated before continuing.
 **Purpose**: Create a working Next.js application in the existing non-empty Spec Kit repository
 before feature code is implemented.
 
-- [ ] T001 Bootstrap a temporary Next.js 16 App Router project and merge its generated `package.json`, `package-lock.json`, `tsconfig.json`, `next.config.ts`, `eslint.config.mjs`, `postcss.config.mjs`, `public/`, and `src/app/` files into the repository root without replacing `.specify/`, `specs/`, `.agents/`, `AGENTS.md`, or `.git/`
-- [ ] T002 Install `@upstash/redis` and `qrcode.react` runtime packages plus Vitest, V8 coverage, Playwright, `@zxing/browser`, Prettier, Tailwind sorting, and path-alias test tooling in `package.json` and `package-lock.json`
-- [ ] T003 Initialize shadcn/ui for the `src/` alias layout and add only Button, Select, and Alert primitives in `components.json` and `src/components/ui/`
-- [ ] T004 [P] Configure strict type checking, Node 24 engines, and `dev`, `build`, `start`, `lint`, `typecheck`, `format`, `format:write`, `test`, `test:watch`, `test:coverage`, and `test:e2e` scripts in `tsconfig.json` and `package.json`
-- [ ] T005 [P] Configure Vitest path aliases and V8 coverage, add a passing foundation smoke test, and configure Playwright with the local Next.js web server in `vitest.config.ts`, `tests/unit/setup/smoke.test.ts`, and `playwright.config.ts`
-- [ ] T006 [P] Configure Prettier and repository ignores in `prettier.config.mjs`, `.prettierignore`, and `.gitignore`
-- [ ] T007 Verify the empty application starts and passes lint, typecheck, test, and production build commands defined in `package.json`, correcting only generated foundation files under `src/app/` and root configuration files
+- [X] T001 Bootstrap a temporary Next.js 16 App Router project and merge its generated `package.json`, `package-lock.json`, `tsconfig.json`, `next.config.ts`, `eslint.config.mjs`, `postcss.config.mjs`, `public/`, and `src/app/` files into the repository root without replacing `.specify/`, `specs/`, `.agents/`, `AGENTS.md`, or `.git/`
+- [X] T002 Install `@upstash/redis` and server-side `qrcode` runtime packages plus Vitest, V8 coverage, Playwright, `@zxing/browser`, Prettier, Tailwind sorting, and path-alias test tooling in `package.json` and `package-lock.json`
+- [X] T003 Initialize shadcn/ui for the `src/` alias layout and add only Button, Select, and Alert primitives in `components.json` and `src/components/ui/`
+- [X] T004 [P] Configure strict type checking, Node 24 engines, and `dev`, `build`, `start`, `lint`, `typecheck`, `format`, `format:write`, `test`, `test:watch`, `test:coverage`, and `test:e2e` scripts in `tsconfig.json` and `package.json`
+- [X] T005 [P] Configure Vitest path aliases and V8 coverage, add a passing foundation smoke test, and configure Playwright with the local Next.js web server in `vitest.config.ts`, `tests/unit/setup/smoke.test.ts`, and `playwright.config.ts`
+- [X] T006 [P] Configure Prettier and repository ignores in `prettier.config.mjs`, `.prettierignore`, and `.gitignore`
+- [X] T007 Verify the empty application starts and passes lint, typecheck, test, and production build commands defined in `package.json`, correcting only generated foundation files under `src/app/` and root configuration files
 
 **Checkpoint**: `npm run dev`, `npm run lint`, `npm run typecheck`, `npm test`, and `npm run build`
 all succeed before domain or product work begins.
@@ -48,14 +48,14 @@ structure needed by every story.
 
 **CRITICAL**: No user story work begins until this phase is complete.
 
-- [ ] T008 Define `WordListLanguage`, `Team`, `CardAssignment`, `GameRecord`, public view, leader view, and unavailable result types in `src/lib/game/types.ts`
-- [ ] T009 [P] Add curated English and Spanish word arrays with at least 25 unique non-empty entries each in `src/lib/game/words/en.ts` and `src/lib/game/words/es.ts`
-- [ ] T010 [P] Add fixed board size, assignment counts, 86,400-second TTL, Redis key prefix, schema version, and token entropy constants in `src/lib/game/constants.ts`
-- [ ] T011 Write environment validation tests requiring `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, and production `APP_ORIGIN` without exposing values in `tests/unit/config/env.test.ts`
-- [ ] T012 Implement server-only environment validation and the Upstash client in `src/lib/config/env.ts` and `src/lib/persistence/redis.ts`
-- [ ] T013 [P] Add empty safe placeholders for local configuration in `.env.example` without committing credentials
-- [ ] T014 [P] Establish global typography, focus visibility, responsive page containers, and accessible color tokens in `src/app/globals.css` and `src/app/layout.tsx`
-- [ ] T015 Add test builders for valid game records, deterministic clocks, and fake persistence clients in `tests/helpers/game-fixtures.ts` and `tests/helpers/fake-redis.ts`
+- [X] T008 Define `WordListLanguage`, `Team`, `CardAssignment`, `GameRecord`, public view, leader view, and unavailable result types in `src/lib/game/types.ts`
+- [X] T009 [P] Add curated English and Spanish word arrays with at least 25 unique non-empty entries each in `src/lib/game/words/en.ts` and `src/lib/game/words/es.ts`
+- [X] T010 [P] Add fixed board size, assignment counts, 86,400-second TTL, Redis key prefix, schema version, and token entropy constants in `src/lib/game/constants.ts`
+- [X] T011 Write environment validation tests requiring `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, and production `APP_ORIGIN` without exposing values in `tests/unit/config/env.test.ts`
+- [X] T012 Implement server-only environment validation and the Upstash client in `src/lib/config/env.ts` and `src/lib/persistence/redis.ts`
+- [X] T013 [P] Add empty safe placeholders for local configuration in `.env.example` without committing credentials
+- [X] T014 [P] Establish global typography, focus visibility, responsive page containers, and accessible color tokens in `src/app/globals.css` and `src/app/layout.tsx`
+- [X] T015 Add test builders for valid game records, deterministic clocks, and fake persistence clients in `tests/helpers/game-fixtures.ts` and `tests/helpers/fake-redis.ts`
 
 **Checkpoint**: Shared types and server boundaries compile without exposing environment variables or
 secret-bearing records to Client Components.
@@ -73,28 +73,28 @@ HTML/RSC data contains no token or card assignments.
 
 ### Tests for User Story 1
 
-- [ ] T016 [P] [US1] Write failing unit tests for language-specific word selection, deterministic randomness, exactly 25 distinct cards, and stable positions in `tests/unit/game/generate.test.ts`
-- [ ] T017 [P] [US1] Write failing unit tests for 9/8/7/1 assignment counts, starting-team balance, malformed records, and invalid word pools in `tests/unit/game/validate.test.ts`
-- [ ] T018 [P] [US1] Write failing unit tests proving the public projection allowlists fields and excludes `leaderToken` and every assignment in `tests/unit/game/projections.test.ts`
-- [ ] T019 [P] [US1] Write failing integration tests for atomic `EX: 86400` storage, Redis key construction, public loading, and no TTL refresh on reads in `tests/integration/persistence/public-games.test.ts`
-- [ ] T020 [P] [US1] Write a failing Playwright test for language selection, game creation, 25 public words, starting-team display, public-source secrecy, and ZXing decoding of the QR to the matching leader URL in `tests/e2e/local-game-session.spec.ts`
+- [X] T016 [P] [US1] Write failing unit tests for language-specific word selection, deterministic randomness, exactly 25 distinct cards, and stable positions in `tests/unit/game/generate.test.ts`
+- [X] T017 [P] [US1] Write failing unit tests for 9/8/7/1 assignment counts, starting-team balance, malformed records, and invalid word pools in `tests/unit/game/validate.test.ts`
+- [X] T018 [P] [US1] Write failing unit tests proving the public projection allowlists fields and excludes `leaderToken` and every assignment in `tests/unit/game/projections.test.ts`
+- [X] T019 [P] [US1] Write failing integration tests for atomic `EX: 86400` storage, Redis key construction, public loading, and no TTL refresh on reads in `tests/integration/persistence/public-games.test.ts`
+- [X] T020 [P] [US1] Write a failing Playwright test for language selection, game creation, 25 public words, starting-team display, public-source secrecy, and ZXing decoding of the QR to the matching leader URL in `tests/e2e/local-game-session.spec.ts`
 
 ### Implementation for User Story 1
 
-- [ ] T021 [P] [US1] Implement injectable shuffle and random-choice helpers plus secure production adapters in `src/lib/game/random.ts`
-- [ ] T022 [P] [US1] Implement UUID game IDs and 32-byte base64url leader-token generation in `src/lib/game/identity.ts`
-- [ ] T023 [US1] Implement complete English/Spanish game generation with fixed positions and 9/8/7/1 assignments in `src/lib/game/generate.ts`
-- [ ] T024 [US1] Implement full stored-record and invariant validation, including 24-hour timestamps and word-list membership, in `src/lib/game/validate.ts`
-- [ ] T025 [US1] Implement allowlist-based `toPublicGameView` and `toLeaderGameView` transformations in `src/lib/game/projections.ts`
-- [ ] T026 [US1] Implement `saveGame`, internal validated loading, and `loadPublicGame` with atomic TTL storage in `src/lib/persistence/games.ts`
-- [ ] T027 [US1] Implement the validated English/Spanish creation Server Action with retryable failure state and redirect to the public URL in `src/app/actions/games.ts`
-- [ ] T028 [P] [US1] Build the accessible language selector, submit state, and creation error UI in `src/components/game/game-creator.tsx`
-- [ ] T029 [P] [US1] Build the secret-free public card and custom responsive 5x5 board components in `src/components/game/board-card.tsx` and `src/components/game/game-board.tsx`
-- [ ] T030 [P] [US1] Build the public starting-team and QR image presentation components in `src/components/game/starting-team.tsx` and `src/components/game/leader-qr.tsx`
-- [ ] T031 [US1] Replace the generated home page with the no-login creation experience in `src/app/page.tsx`
-- [ ] T032 [US1] Implement the public game Server Component using only `PublicGameView` props in `src/app/games/[gameId]/page.tsx`
-- [ ] T033 [US1] Implement the token-free QR endpoint URL with server-side `QRCodeSVG`, trusted `APP_ORIGIN`, and no-store headers in `src/app/games/[gameId]/leader-qr/route.ts`
-- [ ] T034 [US1] Run and complete all US1 tests in `tests/unit/game/`, `tests/integration/persistence/public-games.test.ts`, and `tests/e2e/local-game-session.spec.ts`
+- [X] T021 [P] [US1] Implement injectable shuffle and random-choice helpers plus secure production adapters in `src/lib/game/random.ts`
+- [X] T022 [P] [US1] Implement UUID game IDs and 32-byte base64url leader-token generation in `src/lib/game/identity.ts`
+- [X] T023 [US1] Implement complete English/Spanish game generation with fixed positions and 9/8/7/1 assignments in `src/lib/game/generate.ts`
+- [X] T024 [US1] Implement full stored-record and invariant validation, including 24-hour timestamps and word-list membership, in `src/lib/game/validate.ts`
+- [X] T025 [US1] Implement allowlist-based `toPublicGameView` and `toLeaderGameView` transformations in `src/lib/game/projections.ts`
+- [X] T026 [US1] Implement `saveGame`, internal validated loading, and `loadPublicGame` with atomic TTL storage in `src/lib/persistence/games.ts`
+- [X] T027 [US1] Implement the validated English/Spanish creation Server Action with retryable failure state and redirect to the public URL in `src/app/actions/games.ts`
+- [X] T028 [P] [US1] Build the accessible language selector, submit state, and creation error UI in `src/components/game/game-creator.tsx`
+- [X] T029 [P] [US1] Build the secret-free public card and custom responsive 5x5 board components in `src/components/game/board-card.tsx` and `src/components/game/game-board.tsx`
+- [X] T030 [P] [US1] Build the public starting-team and QR image presentation components in `src/components/game/starting-team.tsx` and `src/components/game/leader-qr.tsx`
+- [X] T031 [US1] Replace the generated home page with the no-login creation experience in `src/app/page.tsx`
+- [X] T032 [US1] Implement the public game Server Component using only `PublicGameView` props in `src/app/games/[gameId]/page.tsx`
+- [X] T033 [US1] Implement the token-free QR endpoint URL with server-side SVG generation, trusted `APP_ORIGIN`, and no-store headers in `src/app/games/[gameId]/leader-qr/route.ts`
+- [X] T034 [US1] Run and complete all US1 tests in `tests/unit/game/`, `tests/integration/persistence/public-games.test.ts`, and `tests/e2e/local-game-session.spec.ts`
 
 **Checkpoint**: User Story 1 is independently demonstrable as a public shared board. The QR may
 encode the future leader route, but the public page itself contains no leader token or assignment.
@@ -112,16 +112,16 @@ no board data.
 
 ### Tests for User Story 2
 
-- [ ] T035 [P] [US2] Write failing integration tests for valid leader loading, mismatched tokens, malformed tokens, missing games, and token-free returned projections in `tests/integration/persistence/leader-games.test.ts`
-- [ ] T036 [P] [US2] Extend the Playwright flow to open the encoded leader destination, compare all 25 words and positions, verify category labels, and reject an altered token in `tests/e2e/local-game-session.spec.ts`
+- [X] T035 [P] [US2] Write failing integration tests for valid leader loading, mismatched tokens, malformed tokens, missing games, and token-free returned projections in `tests/integration/persistence/leader-games.test.ts`
+- [X] T036 [P] [US2] Extend the Playwright flow to open the encoded leader destination, compare all 25 words and positions, verify category labels, and reject an altered token in `tests/e2e/local-game-session.spec.ts`
 
 ### Implementation for User Story 2
 
-- [ ] T037 [US2] Implement server-side leader-token validation and `loadLeaderGame` without returning the stored token in `src/lib/persistence/games.ts`
-- [ ] T038 [P] [US2] Build accessible leader cards and the responsive phone key with text/symbol cues in addition to color in `src/components/game/board-card.tsx` and `src/components/game/leader-key.tsx`
-- [ ] T039 [US2] Implement the private leader Server Component that validates access before constructing leader props in `src/app/games/[gameId]/leader/[token]/page.tsx`
-- [ ] T040 [US2] Add phone portrait assertions and keyboard/focus checks for the leader view in `tests/e2e/local-game-session.spec.ts`
-- [ ] T041 [US2] Run and complete all US2 integration and browser tests in `tests/integration/persistence/leader-games.test.ts` and `tests/e2e/local-game-session.spec.ts`
+- [X] T037 [US2] Implement server-side leader-token validation and `loadLeaderGame` without returning the stored token in `src/lib/persistence/games.ts`
+- [X] T038 [P] [US2] Build accessible leader cards and the responsive phone key with text/symbol cues in addition to color in `src/components/game/board-card.tsx` and `src/components/game/leader-key.tsx`
+- [X] T039 [US2] Implement the private leader Server Component that validates access before constructing leader props in `src/app/games/[gameId]/leader/[token]/page.tsx`
+- [X] T040 [US2] Add phone portrait assertions and keyboard/focus checks for the leader view in `tests/e2e/local-game-session.spec.ts`
+- [X] T041 [US2] Run and complete all US2 integration and browser tests in `tests/integration/persistence/leader-games.test.ts` and `tests/e2e/local-game-session.spec.ts`
 
 **Checkpoint**: User Stories 1 and 2 provide the complete board-to-phone play setup while retaining
 strict public/secret separation.
@@ -139,18 +139,18 @@ path back to `/`.
 
 ### Tests for User Story 3
 
-- [ ] T042 [P] [US3] Write failing unit tests for active and expired timestamp boundaries without sliding expiry in `tests/unit/game/availability.test.ts`
-- [ ] T043 [P] [US3] Write failing integration tests for missing, expired, malformed Redis records and unchanged TTL after repeated loads in `tests/integration/persistence/availability.test.ts`
-- [ ] T044 [P] [US3] Extend Playwright coverage for refresh/revisit behavior, unknown game IDs, incomplete leader links, and friendly retry navigation in `tests/e2e/local-game-session.spec.ts`
+- [X] T042 [P] [US3] Write failing unit tests for active and expired timestamp boundaries without sliding expiry in `tests/unit/game/availability.test.ts`
+- [X] T043 [P] [US3] Write failing integration tests for missing, expired, malformed Redis records and unchanged TTL after repeated loads in `tests/integration/persistence/availability.test.ts`
+- [X] T044 [P] [US3] Extend Playwright coverage for refresh/revisit behavior, unknown game IDs, incomplete leader links, and friendly retry navigation in `tests/e2e/local-game-session.spec.ts`
 
 ### Implementation for User Story 3
 
-- [ ] T045 [US3] Implement explicit active-versus-expired evaluation using `createdAt` and `expiresAt` in `src/lib/game/availability.ts`
-- [ ] T046 [US3] Apply unavailable results uniformly to expired, missing, malformed, and unauthorized reads in `src/lib/persistence/games.ts`
-- [ ] T047 [P] [US3] Build the shared friendly unavailable-game state with a start-new-game link in `src/components/game/unavailable-game.tsx`
-- [ ] T048 [P] [US3] Add route-level loading states that expose no partial board or secret data in `src/app/games/[gameId]/loading.tsx` and `src/app/loading.tsx`
-- [ ] T049 [US3] Integrate the common unavailable state into public and leader pages in `src/app/games/[gameId]/page.tsx` and `src/app/games/[gameId]/leader/[token]/page.tsx`
-- [ ] T050 [US3] Run and complete all US3 unit, integration, and browser tests in `tests/unit/game/availability.test.ts`, `tests/integration/persistence/availability.test.ts`, and `tests/e2e/local-game-session.spec.ts`
+- [X] T045 [US3] Implement explicit active-versus-expired evaluation using `createdAt` and `expiresAt` in `src/lib/game/availability.ts`
+- [X] T046 [US3] Apply unavailable results uniformly to expired, missing, malformed, and unauthorized reads in `src/lib/persistence/games.ts`
+- [X] T047 [P] [US3] Build the shared friendly unavailable-game state with a start-new-game link in `src/components/game/unavailable-game.tsx`
+- [X] T048 [P] [US3] Add route-level loading states that expose no partial board or secret data in `src/app/games/[gameId]/loading.tsx` and `src/app/loading.tsx`
+- [X] T049 [US3] Integrate the common unavailable state into public and leader pages in `src/app/games/[gameId]/page.tsx` and `src/app/games/[gameId]/leader/[token]/page.tsx`
+- [X] T050 [US3] Run and complete all US3 unit, integration, and browser tests in `tests/unit/game/availability.test.ts`, `tests/integration/persistence/availability.test.ts`, and `tests/e2e/local-game-session.spec.ts`
 
 **Checkpoint**: Active games are recoverable for exactly 24 hours and all unavailable cases are
 safe, understandable, and consistent.
@@ -167,14 +167,14 @@ prove every public/leader URL returns only its own game even under repeated and 
 
 ### Tests for User Story 4
 
-- [ ] T051 [P] [US4] Write failing integration tests for cross-token rejection and 100 concurrently created game pairs with unique IDs, tokens, Redis keys, boards, and private projections in `tests/integration/persistence/game-isolation.test.ts`
-- [ ] T052 [P] [US4] Extend Playwright coverage to create two browser-context games and compare public boards, QR destinations, and private keys for zero cross-game exposure in `tests/e2e/local-game-session.spec.ts`
+- [X] T051 [P] [US4] Write failing integration tests for cross-token rejection and 100 concurrently created game pairs with unique IDs, tokens, Redis keys, boards, and private projections in `tests/integration/persistence/game-isolation.test.ts`
+- [X] T052 [P] [US4] Extend Playwright coverage to create two browser-context games and compare public boards, QR destinations, and private keys for zero cross-game exposure in `tests/e2e/local-game-session.spec.ts`
 
 ### Implementation for User Story 4
 
-- [ ] T053 [US4] Enforce game-scoped Redis keys and reject loaded records whose embedded `gameId` differs from the requested key in `src/lib/persistence/games.ts`
-- [ ] T054 [US4] Make creation use a fresh identity pair per request and prevent retries from reusing partial game state in `src/app/actions/games.ts`
-- [ ] T055 [US4] Run and complete all US4 isolation tests in `tests/integration/persistence/game-isolation.test.ts` and `tests/e2e/local-game-session.spec.ts`
+- [X] T053 [US4] Enforce game-scoped Redis keys and reject loaded records whose embedded `gameId` differs from the requested key in `src/lib/persistence/games.ts`
+- [X] T054 [US4] Make creation use a fresh identity pair per request and prevent retries from reusing partial game state in `src/app/actions/games.ts`
+- [X] T055 [US4] Run and complete all US4 isolation tests in `tests/integration/persistence/game-isolation.test.ts` and `tests/e2e/local-game-session.spec.ts`
 
 **Checkpoint**: Multiple groups can create and revisit games without any public or private data
 crossing session boundaries.
@@ -186,14 +186,14 @@ crossing session boundaries.
 **Purpose**: Validate constitution-level secrecy, accessibility, operational setup, and deployment
 readiness across the complete MVP.
 
-- [ ] T056 [P] Add focused application metadata, clear English page labels, and a default not-found experience in `src/app/layout.tsx` and `src/app/not-found.tsx`
-- [ ] T057 [P] Add unit coverage for all validation error branches and maintain high coverage of pure game modules in `tests/unit/game/validate.test.ts` and `vitest.config.ts`
-- [ ] T058 Audit public HTML, RSC requests, SVG metadata, logs, and browser bundles for known tokens and assignment data, encoding regression assertions in `tests/e2e/public-secrecy.spec.ts`
-- [ ] T059 Validate all 25 board words at 1024x768 through 1920x1080, phone leader layouts at 320-430 pixel widths, increased text size, keyboard focus, and no horizontal scrolling or clipping in `tests/e2e/accessibility-layout.spec.ts`
-- [ ] T060 [P] Document local commands, environment setup, architecture boundaries, and Vercel deployment in `README.md` and keep `.env.example` synchronized with `specs/001-local-game-session/contracts/environment.md`
-- [ ] T061 Configure Node 24 deployment expectations and verify no custom server or non-Vercel infrastructure is introduced in `package.json`, `next.config.ts`, and `README.md`
-- [ ] T062 Run the full release gate of formatting, lint, typecheck, coverage, production build, and Playwright tests using scripts in `package.json`, resolving failures only in implementation and test files covered by this task list
-- [ ] T063 Execute every clean-repository setup and manual product scenario in `specs/001-local-game-session/quickstart.md`, correcting stale instructions in that file and recording no secrets in committed files
+- [X] T056 [P] Add focused application metadata, clear English page labels, and a default not-found experience in `src/app/layout.tsx` and `src/app/not-found.tsx`
+- [X] T057 [P] Add unit coverage for all validation error branches and maintain high coverage of pure game modules in `tests/unit/game/validate.test.ts` and `vitest.config.ts`
+- [X] T058 Audit public HTML, RSC requests, SVG metadata, logs, and browser bundles for known tokens and assignment data, encoding regression assertions in `tests/e2e/public-secrecy.spec.ts`
+- [X] T059 Validate all 25 board words at 1024x768 through 1920x1080, phone leader layouts at 320-430 pixel widths, increased text size, keyboard focus, and no horizontal scrolling or clipping in `tests/e2e/accessibility-layout.spec.ts`
+- [X] T060 [P] Document local commands, environment setup, architecture boundaries, and Vercel deployment in `README.md` and keep `.env.example` synchronized with `specs/001-local-game-session/contracts/environment.md`
+- [X] T061 Configure Node 24 deployment expectations and verify no custom server or non-Vercel infrastructure is introduced in `package.json`, `next.config.ts`, and `README.md`
+- [X] T062 Run the full release gate of formatting, lint, typecheck, coverage, production build, and Playwright tests using scripts in `package.json`, resolving failures only in implementation and test files covered by this task list
+- [X] T063 Execute every clean-repository setup and manual product scenario in `specs/001-local-game-session/quickstart.md`, correcting stale instructions in that file and recording no secrets in committed files
 
 ---
 
